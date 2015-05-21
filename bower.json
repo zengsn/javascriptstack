@@ -1,0 +1,14 @@
+{
+	"name": "Teachant",
+	"version": "0.0.1",
+	"description": "A platform like one teacher assistant",
+	"homepage" : "http://www.teachant.com",
+	"author": "Shaoning Zeng",
+	"dependencies": {
+		"angular": "~1.3.5",
+		"angular-route": "~1.3.5",	
+		"angular-resource": "~1.3.5",	
+		"angular-mocks": "~1.3.5",
+		"bootstrap" : "3.3.4"
+	}
+}
