@@ -9,3 +9,8 @@ exports.render = function(req, res) {
 		user: JSON.stringify(req.user)
 	});
 };
+
+// GET (/api)
+exports.api = function(req, res) {
+	res.json({ version: '0.0.1'} );
+};

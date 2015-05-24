@@ -56,7 +56,7 @@ module.exports = function(db) {
 
 	// Set the application view engine and 'views' folder
 	app.set('views', 
-		['./server/index/views']
+		['./server/index/views', './server/auth/views', './server/users/views']
 	);
 	app.set('view engine', 'ejs');
 
@@ -68,8 +68,9 @@ module.exports = function(db) {
 	app.use(passport.session());
 
 	// Load the routing files
-	require('../index/routes/index.server.routes.js')(app);
-	//require('../app/routes/users.server.routes.js')(app);
+	require('../index/routes/server.index.routes.js')(app);
+	require('../auth/routes/server.auth.routes.js')(app);
+	require('../users/routes/server.users.routes.js')(app);
 	//require('../app/routes/articles.server.routes.js')(app);
 
 	// Configure static file serving

@@ -3,8 +3,20 @@
 
 // Define the Grunt configuration method
 module.exports = function(grunt) {
+
+	// Load grunt tasks automatically
+	require('load-grunt-tasks')(grunt);
+
+	// Time how long tasks take. Can help when optimizing build times
+	require('time-grunt')(grunt);
+
+	// Get client app name from cli
+	// $ grunt TASK --app=users
+	var appName = grunt.option('app') || 'index';
 	// Initialize Grunt configuraiton
 	grunt.initConfig({
+	    // Project settings
+	    yeoman: { app: appName },
 		// Configure the grunt-env task
 		env: {
 			test: {
@@ -79,7 +91,7 @@ module.exports = function(grunt) {
 		// Configure the grunt-contrib-csslint task
 		csslint: {
 			all: {
-				src: ['client/**/*.css']
+				src: ['client/*[!lib]*/**/*.css']
 			}
 		},
 		// Configure the grunt-contrib-watch task
@@ -89,7 +101,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint']
 			},
 			css: {
-				files: ['client/**/*.css'],
+				files: ['client/*[!lib]*/**/*.css'],
 				tasks: ['csslint']
 			}
 		},
