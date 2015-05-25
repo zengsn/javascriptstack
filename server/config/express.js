@@ -1,4 +1,5 @@
-// Invoke 'strict' JavaScript mode
+// Author: Shaoning Zeng
+// 2015.5.24 at Beijing, China
 'use strict';
 
 // Load the module dependencies
@@ -71,7 +72,7 @@ module.exports = function(db) {
 	require('../index/routes/server.index.routes.js')(app);
 	require('../auth/routes/server.auth.routes.js')(app);
 	require('../users/routes/server.users.routes.js')(app);
-	//require('../app/routes/articles.server.routes.js')(app);
+	require('../courses/routes/server.courses.routes.js')(app);
 
 	// Configure static file serving
 	app.use(express.static('./client'));

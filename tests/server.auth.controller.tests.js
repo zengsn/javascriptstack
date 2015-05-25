@@ -1,4 +1,5 @@
-// Invoke 'strict' JavaScript mode
+// Author: Shaoning Zeng
+// 2015.5.24 at Beijing, China
 'use strict';
 
 // Load the test dependencies
@@ -30,12 +31,14 @@ describe('Auth Controller Unit Tests:', function() {
 		// Save the new 'User' model instance
 		user.save(function() {
 			done();
-		});
+		}); // as a stub User data for testing
 	});
 
 	// Test the 'Article' GET methods
 	describe('Testing the auth methods \n', function() {
 		it('a) Should be able to sign up a new account', function(done) {
+			// We want to test Signup that will create a new user,
+			// so we create a new User data without saving it into db.
 			var newUser = new User({
 				firstName: 'Full',
 				lastName: 'Name',
@@ -45,9 +48,9 @@ describe('Auth Controller Unit Tests:', function() {
 				password: 'password1',
 				provider : 'local'
 			});
-			// Create a SuperTest request
+			// Create a SuperTest POST request
 			request(app).post('/api/auth/signup')
-				.send(newUser)
+				.send(newUser) // send data same as signup form
 				.set('Accept', 'application/json')
 				.expect('Content-Type', /json/)
 				.expect(200)

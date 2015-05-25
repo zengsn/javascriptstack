@@ -1,4 +1,5 @@
-// Invoke 'strict' JavaScript mode
+// Author: Shaoning Zeng
+// 2015.5.24 at Beijing, China
 'use strict';
 
 // Define the routes module' method

@@ -1,4 +1,5 @@
-// Invoke 'strict' JavaScript mode
+// Author: Shaoning Zeng
+// 2015.5.24 at Beijing, China
 'use strict';
 
 // Load the module dependencies
@@ -71,11 +72,11 @@ exports.toSignup = function(req, res, next) {
 };
 
 // Create a new controller method that creates new 'regular' users
-exports.doSignup = function(req, res, next) {
+exports.signup = function(req, res, next) {
 	var result = {};
 	// If user is not connected, create and login a new user, otherwise redirect the user back to the main application page
 	if (!req.user) {
-		console.dir(req.body);
+		// console.dir(req.body);
 		// Create a new 'User' model instance
 		var user = new User(req.body);
 		var message = null;
@@ -125,7 +126,7 @@ exports.doSignup = function(req, res, next) {
 	}
 };
 // Create a new controller method that creates new 'regular' users
-exports.doSignin = function(req, res, next) {
+exports.signin = function(req, res, next) {
 	var result = {};
 	if (!req.user) {
 		var username = req.body.username;
@@ -202,13 +203,14 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 };
 
 // Create a new controller method for signing out
-exports.doSignout = function(req, res) {
+exports.signout = function(req, res) {
 	// Use the Passport 'logout' method to logout
 	req.logout();
 
 	// Redirect the user back to the main application page
 	res.send({
 		status: 0,
+		redirect: '/',
 		message: 'Logout yet!'
 	});
 };

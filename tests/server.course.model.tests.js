@@ -3,16 +3,17 @@
 'use strict';
 
 // Load the test dependencies
-var app = require('../server.js'),
-	should = require('should'),
+var app 	= require('../server.js'),
+	should 	= require('should'),
 	mongoose = require('mongoose'),
-	User = mongoose.model('User');
+	User 	= mongoose.model('User'),
+	Course 	= mongoose.model('Course');
 
 // Define global variables
-var user;
+var user, course;
 
-// Create an 'Article' model test suite
-describe('User Model Unit Tests:', function() {
+// Create an 'Course' model test suite
+describe('Course Model Unit Tests:', function() {
 	// Define a pre-tests function
 	beforeEach(function(done) {
 		// Create a new 'User' model instance
@@ -28,22 +29,28 @@ describe('User Model Unit Tests:', function() {
 
 		// Save the new 'User' model instance
 		user.save(function() {
+			course = new Course({
+				name: 'UML与可视化建模',
+				english: 'UML & Visual Modeling',
+				shortName: 'uml',
+				creator: user
+			});
 			done();
 		});
 	});
 
-	// Test the 'Article' model save method
+	// Test the 'Course' model save method
 	describe('Testing the save method', function() {
-		it('Should be able to save without problems', function() {
-			user.save(function(err) {
+		it('Should be able to save a course without problems', function() {
+			course.save(function(err) {
 				should.not.exist(err);
 			});
 		});
 
-		it('Should not be able to save an user without an username', function() {
-			user.username = '';
+		it('Should not be able to save a course without an name', function() {
+			course.name = '';
 			
-			user.save(function(err) {
+			course.save(function(err) {
 				should.exist(err);
 			});
 		});
@@ -52,8 +59,10 @@ describe('User Model Unit Tests:', function() {
 	// Define a post-tests function
 	afterEach(function(done) {
 		// Clean the database
-		User.remove(function() {
-			done();
+		Course.remove(function() {
+			User.remove(function() {
+				done();
+			});
 		});
 	});
 });

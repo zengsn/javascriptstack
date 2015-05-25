@@ -1,4 +1,5 @@
-// Invoke 'strict' JavaScript mode
+// Author: Shaoning Zeng
+// 2015.5.24 at Beijing, China
 'use strict';
 
 // Load the module dependencies
@@ -11,8 +12,8 @@ module.exports = function() {
 	var db = mongoose.connect(config.db);
 
 	// Load the application models 
-	require('../users/models/user.server.model');
-	//require('../app/models/article.server.model');
+	require('../users/models/server.user.model');
+	require('../courses/models/server.course.model');
 
 	// Return the Mongoose connection instance
 	return db;
