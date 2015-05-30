@@ -36,6 +36,18 @@ var CourseSchema = new Schema({
 		type: String,
 		trim: true
 	},
+	teacher: {
+		type: Schema.ObjectId,
+		ref: 'Teacher'
+	},
+	start: {
+		type: Date,
+		default: Date.now
+	}, 
+	end: {
+		type: Date,
+		default: Date.now
+	}, 
 	creator: {
 		type: Schema.ObjectId,
 		ref: 'User'
