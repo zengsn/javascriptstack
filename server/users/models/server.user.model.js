@@ -54,7 +54,7 @@ var UserSchema = new Schema({
 
 // Set the 'fullname' virtual property
 UserSchema.virtual('fullName').get(function() {
-	return this.firstName + ' ' + this.lastName;
+	return this.firstName ? this.firstName + ' ' + this.lastName : this.username;
 }).set(function(fullName) {
 	var splitName = fullName.split(' ');
 	this.firstName = splitName[0] || '';

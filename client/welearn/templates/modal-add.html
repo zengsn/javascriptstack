@@ -1,0 +1,24 @@
+<ion-modal-view>
+    <ion-header-bar>
+    	<h1 class="title">添加</h1>
+    	<button class="button button-clear" ng-click="closeModal()">
+            取消
+        </button>
+    </ion-header-bar>
+    <ion-content>
+    	<div class="list">
+			<label class="item item-input">
+				<input type="text" placeholder="课程名称" ng-model="course.name">
+			</label>
+			<label class="item item-input">
+				<input type="text" placeholder="英文名称" ng-model="course.englishName">
+			</label>
+			<label class="item item-input">
+				<textarea placeholder="课程简介" ng-model="course.introduction"></textarea>
+			</label>
+			<button class="button button-block button-positive" ng-click="save()">
+				保存
+			</button>
+		</div>
+    </ion-content>
+</ion-modal-view>

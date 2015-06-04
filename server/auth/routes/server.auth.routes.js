@@ -8,6 +8,8 @@ module.exports = function(app) {
 	var auth = require('../controllers/server.auth.controller');
 
 	// Mount the 'index' controller's 'render' method
+	app.get('/api/auth', auth.getLogin);
+
 	app.get('/api/auth/signin', auth.toSignin);
 	app.post('/api/auth/signin', auth.signin);
 

@@ -1,0 +1,51 @@
+<ion-modal-view>
+		<ion-tabs class="tabs-striped tabs-top tabs-color-positive tabs-icon-left">
+
+			<ion-tab title="登录" icon-on="ion-ios-person" icon-off="ion-ios-person-outline">
+			    <ion-header-bar class="bar bar-header item-input-inset">
+			    	<h3><i class="icon ion-ios-person"></i> 登录</h3>
+			    </ion-header-bar>
+			    <ion-content>
+			    	<div class="list">
+						<label class="item item-input">
+							<input type="text" placeholder="用户名" ng-model="username">
+						</label>
+						<label class="item item-input">
+							<input type="password" placeholder="密码" ng-model="password">
+						</label>
+						<button class="button button-block button-positive" ng-click="signin(username, password)">
+							登录
+						</button>
+			    </ion-content>
+		</div>
+			</ion-tab>
+
+			<ion-tab title="注册" icon-on="ion-ios-personadd" icon-off="ion-ios-personadd-outline">
+			    <ion-header-bar class="bar bar-header item-input-inset">
+			    	<h3><i class="icon ion-ios-personadd"></i> 注册</h3>
+			    </ion-header-bar>
+			    <ion-content>
+			    	<div class="list">
+						<label class="item item-input">
+							<input type="text" placeholder="用户名" ng-model="postData.username">
+						</label>
+						<label class="item item-input">
+							<input type="email" placeholder="Email" ng-model="postData.email">
+						</label>
+						<label class="item item-input">
+							<input type="text" placeholder="班级" ng-model="postData.className">
+						</label>
+						<label class="item item-input">
+							<input type="text" placeholder="学号" ng-model="postData.schoolNumber">
+						</label>
+						<label class="item item-input">
+							<input type="password" placeholder="密码" ng-model="postData.password">
+						</label>
+						<button class="button button-block button-positive" ng-click="signup(postData)">
+							注册
+						</button>
+			    </ion-content>
+			</ion-tab>
+
+		</ion-tabs>
+</ion-modal-view>

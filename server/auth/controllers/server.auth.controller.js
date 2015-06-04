@@ -36,6 +36,14 @@ var getErrorMessage = function(err) {
 	return message;
 };
 
+exports.getLogin = function(req, res, next) {
+	if (req.user) {
+		res.json(req.user);
+	} else {
+		res.send({status: -1});
+	}
+};
+
 // Create a new controller method that renders the signin page
 exports.toSignin = function(req, res, next) {
 	// If user is not connected render the signin page, otherwise redirect the user back to the main application page
@@ -121,7 +129,7 @@ exports.signup = function(req, res, next) {
 	} else {
 		result.status = -1;
 		result.message = "Bad Request!";
-		//return res.redirect('/');
+		result.user = req.user;
 		res.send(result);
 	}
 };
@@ -160,6 +168,7 @@ exports.signin = function(req, res, next) {
 	} else {
 		result.status = -1;
 		result.message = "Bad Request!";
+		result.user = req.user;
 		res.send(result);
 	}
 };

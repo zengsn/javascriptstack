@@ -1,0 +1,39 @@
+<ion-view view-title="设置">
+	<ion-content>
+	    <ion-list>
+			<a class="item item-thumbnail-left item-icon-right" href="#/tab/settings/account">
+				<img src="./img/ionic.png">
+				<h2>{{user.fullName}} (帐号：{{user.username}})</h2>
+				<p>惠州学院 计算机科学系 讲师</p>
+				<p>《UML与可视化建模》、《Android移动应用开发》、《Java语言程序设计》</p>
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
+	    	<div class="item item-divider">&nbsp;</div>
+		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/courses">
+				<i class="icon ion-ios-book calm"></i>
+				<h2>课程</h2>
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
+		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/students" ng-show="isTeacher">
+				<i class="icon ion-ios-person balanced"></i>
+				<h2>学生</h2>
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
+		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/teachers" ng-show="isStudent">
+				<i class="icon ion-ios-person royal"></i>
+				<h2>老师</h2>
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
+	    	<div class="item item-divider">&nbsp;</div>
+		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/aboutus">
+				<i class="icon ion-ios-people dark"></i>
+				<h2>关于微课堂</h2>
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
+	    	<div class="item item-divider">&nbsp;</div>
+		    <a class="item item-assertive" ng-click="signout()" ng-show="user">
+				<p style="text-align:center;">注销</p>
+			</a>
+	    </ion-list>
+	</ion-content>
+</ion-view>
