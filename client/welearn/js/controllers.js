@@ -20,13 +20,14 @@ angular.module('starter.controllers', ['ngCookies'])
           username: username,
           password: password
         }, function success(response) {
-          //console.dir(response);
+          console.dir(response);
           if (response.user) {
             // do nothing
             $scope.user = user;
           }
         }, function error(errorRes) {
-          $scope.showAuthModal();
+          console.dir(errorRes);
+          //$scope.showAuthModal();
         });
       } else { // then show the login view        
         $scope.showAuthModal();
