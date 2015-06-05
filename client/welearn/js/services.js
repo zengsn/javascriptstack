@@ -59,7 +59,7 @@ angular.module('starter.services', ['ngResource'])
 }])
 
 .factory('Signin', ['$resource', function($resource) {
-  var apiUrl = "http://localhost:1980/api/auth/signin";
+  var apiUrl = SRV_URL+"/api/auth/signin";
   return $resource(apiUrl, {}, {
     signin: {
       method: 'POST', cache: false, isArray: false
