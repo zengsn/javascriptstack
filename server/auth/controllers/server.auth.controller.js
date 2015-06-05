@@ -4,6 +4,8 @@
 
 // Load the module dependencies
 var User = require('mongoose').model('User'),
+	Teacher = require('mongoose').model('Teacher'),
+	Student = require('mongoose').model('Student'),
 	passport = require('passport');
 
 // Create a new error handling controller method
@@ -17,11 +19,11 @@ var getErrorMessage = function(err) {
 			// If a unique index error occurs set the message error
 			case 11000:
 			case 11001:
-				message = 'Username already exists';
+				message = '用户名已存在！';
 				break;
 			// If a general error occurs set the message error
 			default:
-				message = 'Something went wrong';
+				message = 'Duang！未知错误！';
 		}
 	} else {
 		// Grab the first error message from a list of possible errors
@@ -98,16 +100,33 @@ exports.signup = function(req, res, next) {
 			if (err) {
 				// Use the error handling method to get the error message
 				var message = getErrorMessage(err);
-
-				// Set the flash messages
-				//req.flash('error', message);
-
-				// Redirect the user back to the signup page
-				//return res.redirect('/signup');
 				result.status = -1;
 				result.message = message;
 				res.send(result);
 			} else {
+				var readyLogin = false;
+				// 检查用户类型
+				if (user.type == 'teacher') {
+					var teacher = new Teacher({
+						user: user
+					});
+					teacher.save(function(errT) {
+						if (errT) {
+							readyLogin = true;
+						}
+					});
+				} else { // 学生帐号
+					var student = new Student({
+						user: user,
+						className: req.body.className,
+						schoolNumber: req.body.schoolNumber
+					});
+					student.save(function(errS) {
+						if (errS) {
+							readyLogin = true;
+						}
+					});
+				}
 				// If the user was created successfully use the Passport 'login' method to login
 				req.login(user, function(err) {
 					// If a login error occurs move to the next middleware
@@ -120,9 +139,6 @@ exports.signup = function(req, res, next) {
 						result.username = user.username;
 					}
 					res.send(result);
-
-					// Redirect the user back to the main application page
-					//return res.redirect('/');
 				});
 			}
 		});

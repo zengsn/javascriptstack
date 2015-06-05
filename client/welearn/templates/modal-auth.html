@@ -27,19 +27,33 @@
 			    <ion-content>
 			    	<div class="list">
 						<label class="item item-input">
-							<input type="text" placeholder="用户名" ng-model="postData.username">
+							<span class="input-label">注册身份</span>
+							<ion-radio ng-model="postData.type" ng-value="'student'" ng-click="setType('student')">学生</ion-radio>
+							<ion-radio ng-model="postData.type" ng-value="'teacher'" ng-click="setType('teacher')">老师</ion-radio>
 						</label>
 						<label class="item item-input">
-							<input type="email" placeholder="Email" ng-model="postData.email">
+							<span class="input-label">用户名</span>
+							<input type="text" placeholder="登录名" ng-model="postData.username">
 						</label>
 						<label class="item item-input">
-							<input type="text" placeholder="班级" ng-model="postData.className">
+							<span class="input-label">姓名</span>
+							<input type="text" placeholder="真实姓名" ng-model="postData.realName">
 						</label>
 						<label class="item item-input">
-							<input type="text" placeholder="学号" ng-model="postData.schoolNumber">
+							<span class="input-label">Email</span>
+							<input type="email" placeholder="推荐QQ邮箱" ng-model="postData.email">
+						</label>
+						<label class="item item-input" ng-show="postData.type=='student'">
+							<span class="input-label">班级</span>
+							<input type="text" placeholder="班级全称" ng-model="postData.className">
+						</label>
+						<label class="item item-input" ng-show="postData.type=='student'">
+							<span class="input-label">学号</span>
+							<input type="text" placeholder="惠州学院学号" ng-model="postData.schoolNumber">
 						</label>
 						<label class="item item-input">
-							<input type="password" placeholder="密码" ng-model="postData.password">
+							<span class="input-label">密码</span>
+							<input type="password" placeholder="6位以上" ng-model="postData.password">
 						</label>
 						<button class="button button-block button-positive" ng-click="signup(postData)">
 							注册

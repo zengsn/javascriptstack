@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ngCookies'])
 
-.controller('ActivitiesCtrl', function($scope, $ionicModal, $http, $cookies, Login, Signin, Signup, Chats) {
+.controller('ActivitiesCtrl', function($scope, $ionicModal, $ionicPopup, $http, $cookies, Login, Signin, Signup, Chats) {
   // check login 
   Login.get({}, {}, function success(login) {
     if (login.username) { // already login
@@ -9,18 +9,18 @@ angular.module('starter.controllers', ['ngCookies'])
     } else { // not login yet
       //var error = login.error;
       // firstly try to login with credits in cookie
-      console.dir($cookies);
+      //console.dir($cookies);
       var username = $cookies.username;
       var password = $cookies.password;
       if (username && password 
         && username != "undefined"
         && password != "undefined") {
-        console.dir('username: ' + username);
+        //console.dir('username: ' + username);
         Signin.signin({}, {
           username: username,
           password: password
         }, function success(response) {
-          console.dir(response);
+          //console.dir(response);
           if (response.user) {
             // do nothing
             $scope.user = user;
@@ -46,7 +46,6 @@ angular.module('starter.controllers', ['ngCookies'])
     });
   };
   // signin and singup
-  $scope.postData = {};
   $scope.signin = function(username, password) {
     if (!username || !password) {
       alert('帐号密码未填写！');
@@ -56,7 +55,7 @@ angular.module('starter.controllers', ['ngCookies'])
       username: username,
       password: password
     }, function success(response) {
-      console.dir(response);
+      //console.dir(response);
       $cookies.username = username;
       $cookies.password = password;
       $scope.modal.hide();
@@ -64,18 +63,36 @@ angular.module('starter.controllers', ['ngCookies'])
       $scope.showAuthModal();
     });
   };
-  $scope.signup = function() {
-    console.dir($scope.postData);
+  $scope.postData = {};
+  $scope.postData.type = 'student';
+  $scope.signup = function(postData) {
+    //console.dir($scope.postData);
     Signup.signup({}, 
-      $scope.postData, 
+      postData, 
       function success(response) {
-        console.dir(response);
-        $cookies.username = $scope.postData.username;
-        $cookies.password = $scope.postData.password;
-        $scope.modal.hide();
+        //console.dir(response);
+        if (response.status==0) { // 注册成功
+          $cookies.username = postData.username;
+          $cookies.password = postData.password;          
+          var alertPopup = $ionicPopup.alert({
+            title: '注册成功！',
+            template: '您已注册成功并已登录！'
+          });
+          alertPopup.then(function(res) {
+            $scope.modal.hide();
+          });          
+        } else { // 注册失败
+          var alertPopup = $ionicPopup.alert({
+            title: '错误',
+            template: response.message
+          });
+          alertPopup.then(function(res) {
+            //$scope.showAuthModal();
+          });
+        }
       }, 
       function error(errorRes) {
-        $scope.showAuthModal();
+        //$scope.showAuthModal();
       }
     );
   };
@@ -128,6 +145,19 @@ $scope.chat = Chats.get($stateParams.chatId);
 .controller('CoursesCtrl', function($scope, $ionicModal) {
   $scope.isTeacher = true;
   $scope.isStudent = false;
+  // 判断是否登录
+  Login.get({}, {}, function success(response) {
+    //console.dir(response);
+    if (response && response.username) {
+      $scope.user = response;
+    } else { // 返回首页
+      $location.path('/');
+    }
+  }, function error(errorRes) {
+    console.dir(errorRes);
+    $location.path('/');
+  });
+  // 准备添加窗口
   $scope.course = {};
   $ionicModal.fromTemplateUrl('templates/modal-add.html', {
     scope: $scope,
@@ -168,6 +198,8 @@ $scope.chat = Chats.get($stateParams.chatId);
     //console.dir(response);
     if (response && response.username) {
       $scope.user = response;
+    } else { // 返回首页
+      $location.path('/');
     }
   }, function error(errorRes) {
   });
@@ -182,9 +214,9 @@ $scope.chat = Chats.get($stateParams.chatId);
         Signout.signout({}, {}, function success(response) {
           $cookies.username = undefined;
           $cookies.password = undefined;
-          $location.path('/tab/activities');
+          $location.path('/');
         }, function error(errorRes) {
-          $location.path('/tab/activities');
+          $location.path('/');
         });
       } else {
         // do nothing

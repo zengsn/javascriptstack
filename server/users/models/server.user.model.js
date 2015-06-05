@@ -11,6 +11,8 @@ var mongoose = require('mongoose'),
 var UserSchema = new Schema({
 	firstName: String,
 	lastName: String,
+	realName: String,
+	type: String,
 	email: {
 		type: String,
 		// Validate the email format
@@ -29,7 +31,6 @@ var UserSchema = new Schema({
 		type: String,
 		// Validate the 'password' value length
 		validate: [
-
 			function(password) {
 				return password && password.length >= 6;
 			}, 'Password should be longer'

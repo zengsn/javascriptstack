@@ -3,9 +3,9 @@
 	    <ion-list>
 			<a class="item item-thumbnail-left item-icon-right" href="#/tab/settings/account">
 				<img src="./img/ionic.png">
-				<h2>{{user.fullName}} (帐号：{{user.username}})</h2>
-				<p>惠州学院 计算机科学系 讲师</p>
-				<p>《UML与可视化建模》、《Android移动应用开发》、《Java语言程序设计》</p>
+				<h2>{{user.type=='teacher'?'教师':'学生'}}：{{user.realName}} (#{{user.username}})</h2>
+				<p>简介：{{user.introduction?user.introduction:'无'}}</p>
+				<p>课程：{{user.courses?user.courses:'无'}}</p>
 				<i class="icon ion-ios-arrow-right"></i>
 			</a>
 	    	<div class="item item-divider">&nbsp;</div>
@@ -14,12 +14,12 @@
 				<h2>课程</h2>
 				<i class="icon ion-ios-arrow-right"></i>
 			</a>
-		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/students" ng-show="isTeacher">
+		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/students" ng-show="user.type=='teacher'">
 				<i class="icon ion-ios-person balanced"></i>
 				<h2>学生</h2>
 				<i class="icon ion-ios-arrow-right"></i>
 			</a>
-		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/teachers" ng-show="isStudent">
+		    <a class="item item-icon-left item-icon-right" href="#/tab/settings/teachers" ng-show="user.type=='student'">
 				<i class="icon ion-ios-person royal"></i>
 				<h2>老师</h2>
 				<i class="icon ion-ios-arrow-right"></i>
