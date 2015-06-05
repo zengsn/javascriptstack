@@ -143,7 +143,7 @@ angular.module('starter.controllers', ['ngCookies'])
 $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('CoursesCtrl', function($scope, $ionicModal) {
+.controller('CoursesCtrl', function($scope, $ionicModal, Login) {
   $scope.isTeacher = true;
   $scope.isStudent = false;
   // 判断是否登录
